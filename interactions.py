@@ -4,13 +4,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from base_config import parse_config
-from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
+from methods import centralize
 
 browser = parse_config()
-
-def centralize(iframe):
-    scroll_origin = ScrollOrigin.from_element(iframe)
-    ActionChains(browser).scroll_from_origin(scroll_origin, 0, 300).perform()
     
 def sort_elements():
 
@@ -26,25 +22,24 @@ def sort_elements():
 
     wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@id='demo-tabpane-list']")))
 
-    centralize(browser.find_element(By.XPATH, "//div[@id='Ad.Plus-970x250-1']"))
+    time.sleep(3)
+
+    centralize(browser, browser.find_element(By.XPATH, "//div[contains(@class,'sortable-container')]"), 300)
 
     items = browser.find_elements(By.XPATH, "//div[contains(@class,'list-group-item')]")
     items_list = [item.text for item in items]
     items_list = [item for item in items_list if item != '']
 
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@id='Ad.Plus-970x250-1']")))
+    time.sleep(3)
 
-    # Reverse list
     items_list.reverse()
-    
+        
     for i in range(len(items_list)-1):
         item = browser.find_element(By.XPATH, f"//div[contains(@class,'list-group-item')][text()='{items_list[i]}']")
         actions = ActionChains(browser)
-        actions.send_keys('Space').drag_and_drop(item, items[i]).perform()        
+        actions.drag_and_drop(item, items[i]).perform()           
 
-    # Fechar o navegador
-    time.sleep(10)
+    time.sleep(5)
     browser.quit()
 
-# Executar o script
 sort_elements()
