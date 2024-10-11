@@ -24,7 +24,7 @@ def sort_elements():
 
     time.sleep(3)
 
-    centralize(browser, browser.find_element(By.XPATH, "//div[contains(@class,'sortable-container')]"), 300)
+    centralize(browser, browser.find_element(By.XPATH, "//div[contains(@class,'sortable-container')]"), 0, 300)
 
     items = browser.find_elements(By.XPATH, "//div[contains(@class,'list-group-item')]")
     items_list = [item.text for item in items]

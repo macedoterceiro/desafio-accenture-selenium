@@ -3,9 +3,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 import string
 import random
 
-def centralize(browser, iframe, value):
+def centralize(browser, iframe, x, y):
     scroll_origin = ScrollOrigin.from_element(iframe)
-    ActionChains(browser).scroll_from_origin(scroll_origin, 0, value).perform()
+    ActionChains(browser).scroll_from_origin(scroll_origin, x, y).perform()
 
 def generate_random_string(size=10):
     letters = string.ascii_lowercase

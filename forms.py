@@ -1,7 +1,6 @@
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from base_config import parse_config
 from methods import generate_random_numbers, generate_random_string, concat_strings, centralize
@@ -11,15 +10,15 @@ browser = parse_config()
 
 def sort_elements():
 
-    browser.get("https://demoqa.com/automation-practice-form")
+    browser.get("https://demoqa.com/")
 
-    #wait = WebDriverWait(browser, 3)
+    wait = WebDriverWait(browser, 3)
 
-    #forms_menu = browser.find_element(By.XPATH, "//h5[text()='Forms']")
-    #forms_menu.click()
+    forms_menu = browser.find_element(By.XPATH, "//h5[text()='Forms']")
+    forms_menu.click()
 
-    #practice_form_submenu = browser.find_element(By.XPATH, "//span[text()='Practice Form']")
-    #practice_form_submenu.click()
+    practice_form_submenu = browser.find_element(By.XPATH, "//span[text()='Practice Form']")
+    practice_form_submenu.click()
 
     first_name = browser.find_element(By.ID, "firstName")
     first_name.send_keys(generate_random_string(6))
@@ -42,7 +41,7 @@ def sort_elements():
     mobile = browser.find_element(By.ID, "userNumber")
     mobile.send_keys(generate_random_numbers())
 
-    centralize(browser, browser.find_element(By.ID, "userForm"), 450)
+    centralize(browser, browser.find_element(By.ID, "userForm"), 0, 450)
     time.sleep(3)
 
     birth_date = browser.find_element(By.ID, "dateOfBirthInput")
@@ -59,7 +58,7 @@ def sort_elements():
     actions.click(hobbies_checkbox).perform()    
 
     file_input = browser.find_element(By.ID, "uploadPicture")
-    file_input.send_keys('/home/macedo/desafio-accenture-selenium/arquivo.txt')
+    file_input.send_keys('/home/macedo/desafio-accenture-selenium/arquivo.txt') #mudar o path para o path absoluto local quando executar em outra maquina
 
     currentAddress = browser.find_element(By.ID, "currentAddress")
     currentAddress.send_keys(
